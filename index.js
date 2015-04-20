@@ -17,6 +17,16 @@ io.sockets.on('connection', function(socket){
 	socket.emit('welcome', {message: 'welcome to chat'});
 	socket.on('send', function(data){
 		console.log('Message received from ' + data.name)
-		io.sockets.emit('message', data)
+		io.sockets.emit('display message', data)
+	})
+
+	socket.on('start typing', function(data){
+		console.log('User ' + data.name + ' has started typing')
+		io.sockets.emit('user typing started', data)
+	})
+
+	socket.on('stop typing', function(data){
+		console.log('User ' + data.name + ' has stopped typing')
+		io.sockets.emit('user typing stopped', data)
 	})
 });
