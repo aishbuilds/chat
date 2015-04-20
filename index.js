@@ -1,28 +1,22 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var express = require('express');
+var app = express();
+var port = '3000';
 
-app.get('/', function(req, res){
-	res.sendFile(__dirname + '/index.html');
-})
+app.set('views', __dirname + '/tpl');
+app.set('view engine', 'jade');
+app.engine('jade', require('jade').__express);
 
-io.on('connection', function(socket){
-	console.log('a user connected');
+app.get('/chat', function(req, res){
+	res.render('page');
+});
 
-	socket.on('disconnect', function(){
-		console.log('user disconnected');
-	});
+app.use(express.static(__dirname + '/public'));
+var io = require('socket.io').listen(app.listen(port));
 
-	socket.on('chat message', function(msg){
-		console.log('message received: ' + msg)
-		io.emit('chat display msg', msg)
-	});
-
-	socket.on('welcome', function(){
-		console.log('welcome msg received')
-	});
-})
-
-http.listen(3000, function(){
-	console.log('listening !');
-})
+io.sockets.on('connection', function(socket){
+	socket.emit('welcome', {message: 'welcome to chat'});
+	socket.on('send', function(data){
+		console.log('Message received from ' + data.name)
+		io.sockets.emit('message', data)
+	})
+});
