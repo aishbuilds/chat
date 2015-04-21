@@ -11,7 +11,9 @@ app.get('/chat', function(req, res){
 });
 
 app.use(express.static(__dirname + '/public'));
-var io = require('socket.io').listen(app.listen(port));
+var io = require('socket.io').listen(app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+}));
 
 io.sockets.on('connection', function(socket){
 	socket.emit('welcome', {message: 'welcome to chat'});
