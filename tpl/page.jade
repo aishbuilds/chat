@@ -6,11 +6,14 @@ html(lang="en")
 		script(src='/chat.js')
 		script(src='/socket.io/socket.io.js')
 	body
-		#content(style='width: 500px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
-		.controls
-			| Name
-			input.field(style='width:350px;', id="user-name")
-			br
-			br
-			input.field(style='width:350px;', id="user-msg")
-			input.send(type="button", value="Send", id="send")
+		
+		#user-detail-div
+			.controls
+				| Name 
+				input.field(style='width:350px;', id="user-name")
+				input.send(type="button", value="Enter", id="contact-submit")
+		#chat-div
+			#content(style='width: 500px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
+			.controls
+				input.field(style='width:350px;', id="user-msg")
+				input.send(type="button", value="Send", id="send")
