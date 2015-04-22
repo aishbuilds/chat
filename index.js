@@ -24,9 +24,9 @@ io.sockets.on('connection', function(socket){
 		socket.room = 'General'
 		socket.join('General');
 		console.log('User ' + name + ' has entered.')
-		// io.sockets.emit('user entered room', name)
-		socket.broadcast.to('General').emit('user entered room', name)
-		socket.emit('user entered room', 'You')
+		
+		socket.broadcast.to('General').emit('user entered room', name, socket.room)
+		socket.emit('user entered room', 'You', socket.room)
 		socket.emit('update room', rooms, socket.room)
 	});
 
@@ -53,8 +53,8 @@ io.sockets.on('connection', function(socket){
 		socket.join(newRoom)
 		socket.room = newRoom
 		console.log('User ' + name + ' has changed room to' + newRoom)
-		socket.broadcast.to(newRoom).emit('user entered room', name)
-		socket.emit('user entered room', 'You')
+		socket.broadcast.to(newRoom).emit('user entered room', name, socket.room)
+		socket.emit('user entered room', 'You', socket.room)
 		socket.emit('update room', rooms, socket.room)
 	})
 });

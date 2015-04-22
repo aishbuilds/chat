@@ -11,8 +11,11 @@ $(document).ready(function(){
 		$('#chat-div').show();
 	});
 
-	socket.on('user entered room', function(name){
-		$('#content').append('<p>' + name + ' entered this room.</p>')
+	socket.on('user entered room', function(name, room){
+		if(name == 'You')
+			$('#content').append('<p>' + name + ' entered room ' + room + '.</p>')
+		else
+			$('#content').append('<p>' + name + ' entered this room.')
 	});
 
 	socket.on('user left room', function(name){
