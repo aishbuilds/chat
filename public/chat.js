@@ -15,6 +15,10 @@ $(document).ready(function(){
 		$('#content').append('<p>' + name + ' entered this room.</p>')
 	});
 
+	socket.on('user left room', function(name){
+		$('#content').append('<p>' + name + ' left this room.</p>')
+	});
+
 	$('#user-msg').focusin(function(e){
 		typingStarted();
 	});
@@ -55,12 +59,16 @@ $(document).ready(function(){
 				$('#rooms').append('<div>' + value + '</div>');
 			}
 			else {
-				$('#rooms').append('<div><a href="#">' + value + '</a></div>');
+				$('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value + '\')">' + value + '</a></div>');
 			}
 		});
 	});
 
 });
+
+function switchRoom(newRoom){
+	socket.emit('room changed', $('#user-name').val(), newRoom)
+}
 
 function typingStarted(){
 	socket.emit('start typing', {});

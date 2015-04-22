@@ -32,7 +32,8 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('send', function(data){
 		console.log('Message received from ' + data.name)
-		io.sockets.emit('display message', data)
+		// io.sockets.emit('display message', data)
+		io.sockets.in(socket.room).emit('display message', data)
 	})
 
 	socket.on('start typing', function(data){
@@ -43,5 +44,17 @@ io.sockets.on('connection', function(socket){
 	socket.on('stop typing', function(data){
 		console.log('User ' + data.name + ' has stopped typing')
 		io.sockets.emit('user typing stopped', data)
+	})
+
+	socket.on('room changed', function(name, newRoom){
+		socket.broadcast.to(socket.room).emit('user left room', name)
+		socket.leave(socket.room)
+
+		socket.join(newRoom)
+		socket.room = newRoom
+		console.log('User ' + name + ' has changed room to' + newRoom)
+		socket.broadcast.to(newRoom).emit('user entered room', name)
+		socket.emit('user entered room', 'You')
+		socket.emit('update room', rooms, socket.room)
 	})
 });
