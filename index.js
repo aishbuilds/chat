@@ -15,12 +15,19 @@ var io = require('socket.io').listen(app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 }));
 
+var rooms = ['General', 'Random'];
+
 io.sockets.on('connection', function(socket){
 
 	socket.on('enter room', function(name){
 		socket.username = name
+		socket.room = 'General'
+		socket.join('General');
 		console.log('User ' + name + ' has entered.')
-		io.sockets.emit('user entered room', name)
+		// io.sockets.emit('user entered room', name)
+		socket.broadcast.to('General').emit('user entered room', name)
+		socket.emit('user entered room', 'You')
+		socket.emit('update room', rooms, socket.room)
 	});
 
 	socket.on('send', function(data){

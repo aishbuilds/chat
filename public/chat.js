@@ -1,6 +1,7 @@
 var socket;
 
 $(document).ready(function(){
+
 	$('#chat-div').hide();
 	socket = io();
 
@@ -11,7 +12,7 @@ $(document).ready(function(){
 	});
 
 	socket.on('user entered room', function(name){
-		$('#content').append('<p>' + name + ' entered room.</p>')
+		$('#content').append('<p>' + name + ' entered this room.</p>')
 	});
 
 	$('#user-msg').focusin(function(e){
@@ -45,6 +46,18 @@ $(document).ready(function(){
 
 	socket.on('user typing stopped', function(data){
 		$( "p" ).remove( "#" + data.name );
+	});
+
+	socket.on('update room', function(rooms, current_room){
+		$('#rooms').empty();
+		$.each(rooms, function(key, value) {
+			if(value == current_room){
+				$('#rooms').append('<div>' + value + '</div>');
+			}
+			else {
+				$('#rooms').append('<div><a href="#">' + value + '</a></div>');
+			}
+		});
 	});
 
 });
