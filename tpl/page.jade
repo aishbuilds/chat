@@ -20,11 +20,14 @@ html(lang="en")
 			.container-fluid
 				.row
 					#sidebar.col-md-2
-						a.links(data-toggle="collapse", href="#online-users" aria-expanded="false" aria-controls="collapseExample1") Online users
-						div#online-users.collapse.items
-						br
-						a.links(data-toggle="collapse", href="#rooms" aria-expanded="false" aria-controls="collapseExample2") Rooms
-						div#rooms.collapse.items
+						.sidebar-list
+							a.links(data-toggle="collapse", href="#online-users" aria-expanded="false" aria-controls="collapseExample1")
+								span.glyphicon.glyphicon-triangle-right.arrow Online users
+							div#online-users.collapse.items
+							br
+							a.links(data-toggle="collapse", href="#rooms" aria-expanded="false" aria-controls="collapseExample2")
+								span.glyphicon.glyphicon-triangle-right.arrow Rooms
+							div#rooms.collapse.items
 					#content.col-md-10
 						ul.nav.nav-tabs
 							li.active

@@ -46,11 +46,24 @@
 	margin-bottom: 15px;
 }
 
+.sidebar-list{
+	margin-top: 15px;
+}
+
 .links, .links:focus, .links:hover{
 	color: #000000;
 	text-decoration: none;
 }
 
 .items{
-	margin-left: 10px;
+	margin-left: 25px;
+}
+
+.arrow{
+	color: #464646;
+}
+
+.online-user-name{
+	margin-bottom: 0px;
+	color: #464646;
 }

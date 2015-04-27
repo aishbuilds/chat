@@ -24,7 +24,7 @@ $(document).ready(function(){
 		$('#online-users').empty();
 		for(i=0;i<rooms_people.length;i++){
 			console.log(rooms_people[i])
-			$('#online-users').append('<p>' + rooms_people[i] + '</p>')
+			$('#online-users').append('<p class="online-user-name">' + rooms_people[i] + '</p>')
 		}
 	})
 
