@@ -75,6 +75,7 @@ $(document).ready(function(){
 				$('#rooms').append('<div><a href="#" onclick="switchRoom(\'' + value + '\')">' + value + '</a></div>');
 			}
 		});
+		$('#current-room').text(current_room)
 	});
 
 });

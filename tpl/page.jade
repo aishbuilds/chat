@@ -19,11 +19,16 @@ html(lang="en")
 		#chat-div
 			.container-fluid
 				.row
-					#online-users.col-md-2
+					#sidebar.col-md-2
+						a.links(data-toggle="collapse", href="#online-users" aria-expanded="false" aria-controls="collapseExample1") Online users
+						div#online-users.collapse.items
+						br
+						a.links(data-toggle="collapse", href="#rooms" aria-expanded="false" aria-controls="collapseExample2") Rooms
+						div#rooms.collapse.items
 					#content.col-md-10
 						ul.nav.nav-tabs
 							li.active
-								a(href="#") General
+								a(href="#" id="current-room") General
 				.row#chat-bar
 					input.field(id="user-msg" class="col-md-8")
 					input.send(type="button", value="Send", id="send" class="col-md-1")

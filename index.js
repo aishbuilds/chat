@@ -57,7 +57,13 @@ io.sockets.on('connection', function(socket){
 	})
 
 	socket.on('room changed', function(name, newRoom){
+		var index = rooms_people[socket.room].indexOf(name)
+		if (index > -1) {
+	    	rooms_people[socket.room].splice(index, 1);
+		}
+
 		socket.broadcast.to(socket.room).emit('user left room', name)
+		socket.broadcast.to(socket.room).emit('update online users', rooms_people[socket.room])
 		socket.leave(socket.room)
 
 		socket.join(newRoom)
@@ -68,7 +74,8 @@ io.sockets.on('connection', function(socket){
 		console.log(rooms_people)
 		
 		socket.broadcast.to(newRoom).emit('user entered room', name, socket.room)
-		socket.broadcast.to(newRoom).emit('update online users', rooms_people['General'])
+		socket.broadcast.to(newRoom).emit('update online users', rooms_people[newRoom])
+		socket.emit('update online users', rooms_people[newRoom])
 
 		socket.emit('user entered room', 'You', socket.room)
 		socket.emit('update room', rooms, socket.room)

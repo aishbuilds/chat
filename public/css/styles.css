@@ -1,4 +1,4 @@
-#online-users{
+#sidebar{
 	background-color: #E0E0E0;
 	height: 770px;
 	color: #000000;
@@ -44,4 +44,13 @@
 .nav-tabs{
 	border: 1px solid #464646;
 	margin-bottom: 15px;
+}
+
+.links, .links:focus, .links:hover{
+	color: #000000;
+	text-decoration: none;
+}
+
+.items{
+	margin-left: 10px;
 }
