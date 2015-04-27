@@ -23,7 +23,11 @@
 	height: 770px;
 	color: #FFFFFF;
 	padding-left: 0px;
+}
+
+#all-chats{
 	overflow-y: scroll;
+	max-height: 600px;
 }
 
 .chat-msg{

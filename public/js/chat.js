@@ -15,16 +15,15 @@ $(document).ready(function(){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
 		if(name == 'You')
-			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>room <span class="room-name">' + room + '</span>.</pre>')
+			$('#all-chats').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>room <span class="room-name">' + room + '</span>.</pre>')
 		else
-			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>this room.</pre>')
+			$('#all-chats').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>this room.</pre>')
 	});
 
 	socket.on('update online users', function(rooms_people){
 
 		$('#online-users').empty();
 		for(i=0;i<rooms_people.length;i++){
-			console.log(rooms_people[i])
 			$('#online-users').append('<p class="online-user-name">' + rooms_people[i] + '</pre>')
 		}
 
@@ -34,7 +33,7 @@ $(document).ready(function(){
 	socket.on('user left room', function(name){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
-		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text">left </span>this room.</pre>')
+		$('#all-chats').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text">left </span>this room.</pre>')
 	});
 
 	$('#user-msg').focusin(function(e){
@@ -59,12 +58,16 @@ $(document).ready(function(){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
 		sender = data.name ? data.name : 'Server'
-		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + sender + ': </span>' + data.message + '</pre>')
+		$('#all-chats').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + sender + ': </span>' + data.message + '</pre>')
+		
+		if((600 - $('#all-chats').height()) <= $(window).scrollTop()){
+			$('#all-chats').scrollTop($('pre:last').position().top - 30);
+		}
 	});
 
 	socket.on('user typing started', function(name){
 		if ( !$( "#" + name ).length ) {
-			$('#content').append('<p class="chat-msg typing-text" id=' + name + '>' + name + ' is typing..</p>')
+			$('#all-chats').append('<p class="chat-msg typing-text" id=' + name + '>' + name + ' is typing..</p>')
 		}
 	});
 
