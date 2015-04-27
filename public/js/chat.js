@@ -12,24 +12,27 @@ $(document).ready(function(){
 	});
 
 	socket.on('user entered room', function(name, room){
+		var pre = document.getElementsByTagName('pre')
+        pl = pre.length + 1;
 		if(name == 'You')
-			$('#content').append('<p class="chat-msg">' + name + ' entered room ' + room + '.</p>')
+			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' entered room ' + room + '.</pre>')
 		else
-			$('#content').append('<p class="chat-msg">' + name + ' entered this room.</p>')
+			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' entered this room.</pre>')
 	});
 
 	socket.on('update online users', function(rooms_people){
-		console.log("rooms_people")
-		console.log(rooms_people)
+
 		$('#online-users').empty();
 		for(i=0;i<rooms_people.length;i++){
 			console.log(rooms_people[i])
-			$('#online-users').append('<p class="online-user-name">' + rooms_people[i] + '</p>')
+			$('#online-users').append('<p class="online-user-name">' + rooms_people[i] + '</pre>')
 		}
 	})
 
 	socket.on('user left room', function(name){
-		$('#content').append('<p class="chat-msg">' + name + ' left this room.</p>')
+		var pre = document.getElementsByTagName('pre')
+        pl = pre.length + 1;
+		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' left this room.</pre>')
 	});
 
 	$('#user-msg').focusin(function(e){
@@ -51,8 +54,10 @@ $(document).ready(function(){
 	});
 
 	socket.on('display message', function(data){
+		var pre = document.getElementsByTagName('pre')
+        pl = pre.length + 1;
 		sender = data.name ? data.name : 'Server'
-		$('#content').append('<b class="chat-msg">' + sender + ': ' + '</b>' + data.message + '<br/>')
+		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + sender + ': ' + data.message + '</pre>')
 	});
 
 	socket.on('user typing started', function(name){
