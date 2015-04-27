@@ -13,13 +13,23 @@ $(document).ready(function(){
 
 	socket.on('user entered room', function(name, room){
 		if(name == 'You')
-			$('#content').append('<p>' + name + ' entered room ' + room + '.</p>')
+			$('#content').append('<p class="chat-msg">' + name + ' entered room ' + room + '.</p>')
 		else
-			$('#content').append('<p>' + name + ' entered this room.')
+			$('#content').append('<p class="chat-msg">' + name + ' entered this room.</p>')
 	});
 
+	socket.on('update online users', function(rooms_people){
+		console.log("rooms_people")
+		console.log(rooms_people)
+		$('#online-users').empty();
+		for(i=0;i<rooms_people.length;i++){
+			console.log(rooms_people[i])
+			$('#online-users').append('<p>' + rooms_people[i] + '</p>')
+		}
+	})
+
 	socket.on('user left room', function(name){
-		$('#content').append('<p>' + name + ' left this room.</p>')
+		$('#content').append('<p class="chat-msg">' + name + ' left this room.</p>')
 	});
 
 	$('#user-msg').focusin(function(e){
@@ -42,12 +52,12 @@ $(document).ready(function(){
 
 	socket.on('display message', function(data){
 		sender = data.name ? data.name : 'Server'
-		$('#content').append('<b>' + sender + ': ' + '</b>' + data.message + '<br/>')
+		$('#content').append('<b class="chat-msg">' + sender + ': ' + '</b>' + data.message + '<br/>')
 	});
 
 	socket.on('user typing started', function(name){
 		if ( !$( "#" + name ).length ) {
-			$('#content').append('<p id=' + name + '>' + name + ' is typing..</p>')
+			$('#content').append('<p class="chat-msg" id=' + name + '>' + name + ' is typing..</p>')
 		}
 	});
 

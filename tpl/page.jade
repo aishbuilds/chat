@@ -2,9 +2,13 @@ doctype html
 html(lang="en")
 	head
 		title= "Real time chat"
+		meta(name="viewport" content="width=device-width, initial-scale=1")
 		script(type='text/javascript', src="https://code.jquery.com/jquery-1.9.1.min.js")
-		script(src='/chat.js')
+		script(src='js/chat.js')
 		script(src='/socket.io/socket.io.js')
+		script(src='js/bootstrap.min.js')
+		link(rel='stylesheet' href='css/bootstrap.min.css')
+		link(rel='stylesheet' href='css/styles.css')
 	body
 		
 		#user-detail-div
@@ -13,11 +17,13 @@ html(lang="en")
 				input.field(style='width:350px;', id="user-name")
 				input.send(type="button", value="Enter", id="contact-submit")
 		#chat-div
-			#content(style='width: 500px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
-			.controls
-				input.field(style='width:350px;', id="user-msg")
-				input.send(type="button", value="Send", id="send")
-			br
-			br
-			| Rooms:
-			#rooms
+			.container-fluid
+				.row
+					#online-users.col-md-2
+					#content.col-md-10
+						ul.nav.nav-tabs
+							li.active
+								a(href="#") General
+				.row#chat-bar
+					input.field(id="user-msg" class="col-md-8")
+					input.send(type="button", value="Send", id="send" class="col-md-1")

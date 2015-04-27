@@ -16,6 +16,10 @@ var io = require('socket.io').listen(app.listen(port, function(){
 }));
 
 var rooms = ['General', 'Random'];
+var rooms_people = {
+	'General': [],
+	'Random': []
+}
 
 io.sockets.on('connection', function(socket){
 
@@ -25,7 +29,13 @@ io.sockets.on('connection', function(socket){
 		socket.join('General');
 		console.log('User ' + name + ' has entered.')
 		
+		rooms_people['General'].push(name)
+		
 		socket.broadcast.to('General').emit('user entered room', name, socket.room)
+		
+		socket.broadcast.to('General').emit('update online users', rooms_people['General'])
+		socket.emit('update online users', rooms_people['General'])
+
 		socket.emit('user entered room', 'You', socket.room)
 		socket.emit('update room', rooms, socket.room)
 	});
@@ -53,7 +63,13 @@ io.sockets.on('connection', function(socket){
 		socket.join(newRoom)
 		socket.room = newRoom
 		console.log('User ' + name + ' has changed room to' + newRoom)
+
+		rooms_people[newRoom].push(name)
+		console.log(rooms_people)
+		
 		socket.broadcast.to(newRoom).emit('user entered room', name, socket.room)
+		socket.broadcast.to(newRoom).emit('update online users', rooms_people['General'])
+
 		socket.emit('user entered room', 'You', socket.room)
 		socket.emit('update room', rooms, socket.room)
 	})
