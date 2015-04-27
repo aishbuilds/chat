@@ -27,6 +27,8 @@ $(document).ready(function(){
 			console.log(rooms_people[i])
 			$('#online-users').append('<p class="online-user-name">' + rooms_people[i] + '</pre>')
 		}
+
+		$('#online-count').text('Online users: ' + rooms_people.length)
 	})
 
 	socket.on('user left room', function(name){

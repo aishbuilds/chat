@@ -41,11 +41,16 @@
 	height: 60px;
 }
 
+#online-count{
+	color: #FFFFFF;
+	margin-top: 15px;
+}
+
 #user-msg{
 	margin-top: 10px;
 	background-color: #FFFFFF;
 	height: 30px;
-	margin-left: 20.666667%;
+	margin-left: 4.666667%;
 }
 
 .send{
