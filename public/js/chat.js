@@ -15,9 +15,9 @@ $(document).ready(function(){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
 		if(name == 'You')
-			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' entered room ' + room + '.</pre>')
+			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>room <span class="room-name">' + room + '</span>.</pre>')
 		else
-			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' entered this room.</pre>')
+			$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text"> entered </span>this room.</pre>')
 	});
 
 	socket.on('update online users', function(rooms_people){
@@ -32,7 +32,7 @@ $(document).ready(function(){
 	socket.on('user left room', function(name){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
-		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + name + ' left this room.</pre>')
+		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + name + ' </span><span class="typing-text">left </span>this room.</pre>')
 	});
 
 	$('#user-msg').focusin(function(e){
@@ -57,12 +57,12 @@ $(document).ready(function(){
 		var pre = document.getElementsByTagName('pre')
         pl = pre.length + 1;
 		sender = data.name ? data.name : 'Server'
-		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span>' + sender + ': ' + data.message + '</pre>')
+		$('#content').append('<pre class="chat-msg"> <span class="line"><b>' + pl + ' | </b></span><span class="user-name">' + sender + ': </span>' + data.message + '</pre>')
 	});
 
 	socket.on('user typing started', function(name){
 		if ( !$( "#" + name ).length ) {
-			$('#content').append('<p class="chat-msg" id=' + name + '>' + name + ' is typing..</p>')
+			$('#content').append('<p class="chat-msg typing-text" id=' + name + '>' + name + ' is typing..</p>')
 		}
 	});
 

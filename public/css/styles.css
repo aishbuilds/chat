@@ -78,3 +78,18 @@
 .line{
 	color: #464646;
 }
+
+.room-name{
+	/*Green*/
+	color: #DF3963;
+}
+
+.user-name{
+	/*purple*/
+	color: #A4C629;
+}
+
+/*#9278FC*/
+.typing-text{
+	color: #F6B327;
+}
