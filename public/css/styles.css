@@ -1,3 +1,17 @@
+#user-detail-div{
+	background-color: #000000;
+	height: 850px;
+}
+
+#user-fields{
+	margin-top: 320px;
+	color: #FFFFFF;
+}
+
+#user-name{
+	text-align: center;
+}
+
 #sidebar{
 	background-color: #E0E0E0;
 	height: 770px;
@@ -34,7 +48,7 @@
 	margin-left: 20.666667%;
 }
 
-#send{
+.send{
 	background-color: #323232;
 	border: 1px solid #000000;
 	color: #FFFFFF;
@@ -80,16 +94,16 @@
 }
 
 .room-name{
-	/*Green*/
+	/*red*/
 	color: #DF3963;
 }
 
 .user-name{
-	/*purple*/
+	/*green*/
 	color: #A4C629;
 }
 
-/*#9278FC*/
 .typing-text{
+	/*orange*/
 	color: #F6B327;
 }
