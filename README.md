@@ -2,6 +2,8 @@
 
 A simple chat application built using socket.io and node.js
 
+Working demo - https://hidden-hollows-2121.herokuapp.com/chat
+
 ## Installation
 
 - Install [node.js](https://nodejs.org/)
