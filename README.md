@@ -2,6 +2,10 @@
 
 A simple chat application built using socket.io and node.js
 
+## Installation
+
+- Install [node.js](https://nodejs.org/)
+
 ## How to use
 
 ```
