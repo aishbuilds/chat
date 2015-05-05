@@ -22,7 +22,7 @@ Open your browser to localhost:3000/chat
 
 - Ability to switch between multiple rooms
 - Shows list of users online
-- Shows "{user}" is typing feature
+- Shows "{user}" is typing
 - Broadcasts a message when the user enters or leaves a room
 - Chat skin similar to the popular text editor - Sublime
 
