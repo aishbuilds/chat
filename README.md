@@ -26,4 +26,10 @@ Open your browser to localhost:3000/chat
 - Broadcasts a message when the user enters or leaves a room
 - Chat skin similar to the popular text editor - Sublime
 
+## Further Ideas
+
+- Send private messages
+- Chat in multiple rooms at a time
+- Support for nicknames
+
 
